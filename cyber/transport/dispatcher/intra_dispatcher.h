@@ -153,15 +153,12 @@ class ChannelChain {
 
     if ((*handlers)[channel_id].find(message_type) ==
         (*handlers)[channel_id].end()) {
-      ADEBUG << "Create new ListenerHandler for channel "
-             << GlobalData::GetChannelById(channel_id)
-             << ", message type: " << message_type;
+      //ADEBUG << "Create new ListenerHandler for channel " << GlobalData::GetChannelById(channel_id) << ", message type: " << message_type;
       handler.reset(new ListenerHandler<MessageT>());
       (*handlers)[channel_id][message_type] = handler;
       created = true;
     } else {
-      ADEBUG << "Find channel " << GlobalData::GetChannelById(channel_id)
-             << "'s ListenerHandler, message type: " << message_type;
+      //ADEBUG << "Find channel " << GlobalData::GetChannelById(channel_id) << "'s ListenerHandler, message type: " << message_type;
       handler = std::dynamic_pointer_cast<ListenerHandler<MessageT>>(
           (*handlers)[channel_id][message_type]);
     }
@@ -178,13 +175,11 @@ class ChannelChain {
       if ((*handlers)[channel_id].find(message_type) !=
           (*handlers)[channel_id].end()) {
         handler_base = (*handlers)[channel_id][message_type];
-        ADEBUG << "remove " << GlobalData::GetChannelById(channel_id) << "'s "
-               << message_type << " ListenerHandler";
+        //ADEBUG << "remove " << GlobalData::GetChannelById(channel_id) << "'s " << message_type << " ListenerHandler";
         (*handlers)[channel_id].erase(message_type);
       }
       if ((*handlers)[channel_id].empty()) {
-        ADEBUG << "remove " << GlobalData::GetChannelById(channel_id)
-               << "'s all ListenerHandler";
+        //ADEBUG << "remove " << GlobalData::GetChannelById(channel_id) << "'s all ListenerHandler";
         (*handlers).erase(channel_id);
       }
     }
@@ -204,14 +199,12 @@ class ChannelChain {
     }
     const auto& channel_handlers = channel_handlers_itr->second;
 
-    ADEBUG << GlobalData::GetChannelById(channel_id)
-           << "'s chain run, size: " << channel_handlers.size()
-           << ", message type: " << message_type;
+    //ADEBUG << GlobalData::GetChannelById(channel_id) << "'s chain run, size: " << channel_handlers.size() << ", message type: " << message_type;
     std::string msg;
     for (const auto& ele : channel_handlers) {
       auto handler_base = ele.second;
       if (message_type == ele.first) {
-        ADEBUG << "Run handler for message type: " << ele.first << " directly";
+        //ADEBUG << "Run handler for message type: " << ele.first << " directly";
         auto handler =
             std::static_pointer_cast<ListenerHandler<MessageT>>(handler_base);
         if (handler == nullptr) {
@@ -219,8 +212,7 @@ class ChannelChain {
         }
         handler->Run(message, message_info);
       } else {
-        ADEBUG << "Run handler for message type: " << ele.first
-               << " from string";
+        //ADEBUG << "Run handler for message type: " << ele.first << " from string";
         if (msg.empty()) {
           auto msg_size = message::FullByteSize(*message);
           if (msg_size < 0) {
@@ -289,8 +281,7 @@ void IntraDispatcher::OnMessage(uint64_t channel_id,
     return;
   }
   ListenerHandlerBasePtr* handler_base = nullptr;
-  ADEBUG << "intra on message, channel:"
-         << common::GlobalData::GetChannelById(channel_id);
+  //ADEBUG << "intra on message, channel:" << common::GlobalData::GetChannelById(channel_id);
   if (msg_listeners_.Get(channel_id, &handler_base)) {
     auto handler =
         std::dynamic_pointer_cast<ListenerHandler<MessageT>>(*handler_base);
@@ -326,14 +317,10 @@ std::shared_ptr<ListenerHandler<MessageT>> IntraDispatcher::GetHandler(
     handler =
         std::dynamic_pointer_cast<ListenerHandler<MessageT>>(*handler_base);
     if (handler == nullptr) {
-      ADEBUG << "Find a new type for channel "
-             << GlobalData::GetChannelById(channel_id) << " with type "
-             << message::GetMessageName<MessageT>();
+      //ADEBUG << "Find a new type for channel " << GlobalData::GetChannelById(channel_id) << " with type " << message::GetMessageName<MessageT>();
     }
   } else {
-    ADEBUG << "Create new ListenerHandler for channel "
-           << GlobalData::GetChannelById(channel_id) << " with type "
-           << message::GetMessageName<MessageT>();
+    //ADEBUG << "Create new ListenerHandler for channel " << GlobalData::GetChannelById(channel_id) << " with type " << message::GetMessageName<MessageT>();
     handler.reset(new ListenerHandler<MessageT>());
     msg_listeners_.Set(channel_id, handler);
   }

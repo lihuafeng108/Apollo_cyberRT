@@ -120,7 +120,7 @@ void GlobalData::InitHostInfo() {
     std::string starts = ip_env_str.substr(0, 3);
     if (starts != "127") {
       host_ip_ = ip_env_str;
-      AINFO << "host ip: " << host_ip_;
+      AINFO << "host ip: " << host_ip_ << std::endl;
       return;
     }
   }
@@ -151,7 +151,7 @@ void GlobalData::InitHostInfo() {
     }
   }
   freeifaddrs(ifaddr);
-  AINFO << "host ip: " << host_ip_;
+  AINFO << "host ip: " << host_ip_ << std::endl;
 }
 
 bool GlobalData::InitConfig() {

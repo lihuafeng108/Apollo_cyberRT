@@ -26,7 +26,7 @@ Dispatcher::~Dispatcher() { Shutdown(); }
 
 void Dispatcher::Shutdown() {
   is_shutdown_.store(true);
-  ADEBUG << "Shutdown";
+  //ADEBUG << "Shutdown";
 }
 
 bool Dispatcher::HasChannel(uint64_t channel_id) {

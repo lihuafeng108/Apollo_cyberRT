@@ -43,7 +43,7 @@ bool Scheduler::CreateTask(std::function<void()>&& func,
                            const std::string& name,
                            std::shared_ptr<DataVisitorBase> visitor) {
   if (cyber_unlikely(stop_.load())) {
-    ADEBUG << "scheduler is stoped, cannot create task!";
+    //ADEBUG << "scheduler is stoped, cannot create task!";
     return false;
   }
 
@@ -52,7 +52,7 @@ bool Scheduler::CreateTask(std::function<void()>&& func,
   auto cr = std::make_shared<CRoutine>(func);
   cr->set_id(task_id);
   cr->set_name(name);
-  AINFO << "create croutine: " << name;
+  AINFO << "create croutine: " << name << std::endl;
 
   if (!DispatchTask(cr)) {
     return false;

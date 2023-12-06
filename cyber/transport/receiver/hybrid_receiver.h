@@ -284,7 +284,7 @@ void HybridReceiver<M>::ThreadFunc(const RoleAttributes& opposite_attr) {
   } while (is_msg_arrived);
 
   receiver->Disable();
-  ADEBUG << "recv threadfunc exit.";
+  //ADEBUG << "recv threadfunc exit.";
 }
 
 template <typename M>

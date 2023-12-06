@@ -44,7 +44,7 @@ void ParseCpuset(const std::string& str, std::vector<int>* cpuset) {
         cpuset->push_back(i);
       }
     } else {
-      ADEBUG << "Parsing cpuset format error.";
+      //ADEBUG << "Parsing cpuset format error.";
       exit(0);
     }
   }

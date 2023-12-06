@@ -46,7 +46,7 @@ bool PosixSegment::OpenOrCreate() {
   int fd = shm_open(shm_name_.c_str(), O_RDWR | O_CREAT | O_EXCL, 0644);
   if (fd < 0) {
     if (EEXIST == errno) {
-      ADEBUG << "shm already exist, open only.";
+      //ADEBUG << "shm already exist, open only." << std::endl;
       return OpenOnly();
     } else {
       AERROR << "create shm failed, error: " << strerror(errno);
@@ -212,7 +212,7 @@ bool PosixSegment::OpenOnly() {
 
   state_->IncreaseReferenceCounts();
   init_ = true;
-  ADEBUG << "open only true.";
+  //ADEBUG << "open only true.";
   return true;
 }
 

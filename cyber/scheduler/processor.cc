@@ -39,7 +39,7 @@ Processor::~Processor() { Stop(); }
 
 void Processor::Run() {
   tid_.store(static_cast<int>(syscall(SYS_gettid)));
-  AINFO << "processor_tid: " << tid_;
+  AINFO << "processor_tid: " << tid_ << std::endl;
   snap_shot_->processor_id.store(tid_);
 
   while (cyber_likely(running_.load())) {

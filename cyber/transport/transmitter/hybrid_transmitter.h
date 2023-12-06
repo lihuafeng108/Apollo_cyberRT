@@ -291,7 +291,7 @@ void HybridTransmitter<M>::ThreadFunc(
     cyber::USleep(1000);
   }
   new_transmitter->Disable();
-  ADEBUG << "trans threadfunc exit.";
+  //ADEBUG << "trans threadfunc exit.";
 }
 
 template <typename M>

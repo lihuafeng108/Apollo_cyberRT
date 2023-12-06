@@ -111,10 +111,10 @@ bool Init(const char* binary_name) {
   // Register exit handlers
   if (!g_atexit_registered) {
     if (std::atexit(ExitHandle) != 0) {
-      AERROR << "Register exit handle failed";
+      AERROR << "Register exit handle failed" << std::endl;
       return false;
     }
-    AINFO << "Register exit handle succ.";
+    AINFO << "Register exit handle succ." << std::endl;
     g_atexit_registered = true;
   }
   SetState(STATE_INITIALIZED);

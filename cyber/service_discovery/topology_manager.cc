@@ -37,7 +37,7 @@ TopologyManager::TopologyManager()
 TopologyManager::~TopologyManager() { Shutdown(); }
 
 void TopologyManager::Shutdown() {
-  ADEBUG << "topology shutdown.";
+  //ADEBUG << "topology shutdown.";
   // avoid shutdown twice
   if (!init_.exchange(false)) {
     return;
@@ -183,7 +183,7 @@ bool TopologyManager::ParseParticipantName(const std::string& participant_name,
   // participant_name format: host_name+process_id
   auto pos = participant_name.find('+');
   if (pos == std::string::npos) {
-    ADEBUG << "participant_name [" << participant_name << "] format mismatch.";
+    //ADEBUG << "participant_name [" << participant_name << "] format mismatch.";
     return false;
   }
   *host_name = participant_name.substr(0, pos);

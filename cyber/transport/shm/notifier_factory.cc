@@ -37,7 +37,7 @@ auto NotifierFactory::CreateNotifier() -> NotifierPtr {
     notifier_type = g_conf.transport_conf().shm_conf().notifier_type();
   }
 
-  ADEBUG << "notifier type: " << notifier_type;
+  //ADEBUG << "notifier type: " << notifier_type << std::endl;
 
   if (notifier_type == MulticastNotifier::Type()) {
     return CreateMulticastNotifier();

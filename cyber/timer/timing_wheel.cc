@@ -26,7 +26,7 @@ namespace cyber {
 void TimingWheel::Start() {
   std::lock_guard<std::mutex> lock(running_mutex_);
   if (!running_) {
-    ADEBUG << "TimeWheel start ok";
+    //ADEBUG << "TimeWheel start ok";
     running_ = true;
     tick_thread_ = std::thread([this]() { this->TickFunc(); });
     scheduler::Instance()->SetInnerThreadAttr("timer", &tick_thread_);
@@ -51,8 +51,7 @@ void TimingWheel::Tick() {
     while (ite != bucket.task_list().end()) {
       auto task = ite->lock();
       if (task) {
-        ADEBUG << "index: " << current_work_wheel_index_
-               << " timer id: " << task->timer_id_;
+        //ADEBUG << "index: " << current_work_wheel_index_ << " timer id: " << task->timer_id_;
         auto* callback =
             reinterpret_cast<std::function<void()>*>(&(task->callback));
         cyber::Async([this, callback] {
@@ -86,7 +85,7 @@ void TimingWheel::AddTask(const std::shared_ptr<TimerTask>& task,
     if (assistant_ticks == 1 &&
         real_work_wheel_index < current_work_wheel_index_) {
       work_wheel_[real_work_wheel_index].AddTask(task);
-      ADEBUG << "add task to work wheel. index :" << real_work_wheel_index;
+      //ADEBUG << "add task to work wheel. index :" << real_work_wheel_index;
     } else {
       auto assistant_wheel_index = 0;
       {
@@ -95,13 +94,11 @@ void TimingWheel::AddTask(const std::shared_ptr<TimerTask>& task,
             current_assistant_wheel_index_ + assistant_ticks);
         assistant_wheel_[assistant_wheel_index].AddTask(task);
       }
-      ADEBUG << "add task to assistant wheel. index : "
-             << assistant_wheel_index;
+      //ADEBUG << "add task to assistant wheel. index : " << assistant_wheel_index;
     }
   } else {
     work_wheel_[work_wheel_index].AddTask(task);
-    ADEBUG << "add task [" << task->timer_id_
-           << "] to work wheel. index :" << work_wheel_index;
+    //ADEBUG << "add task [" << task->timer_id_ << "] to work wheel. index :" << work_wheel_index;
   }
 }
 

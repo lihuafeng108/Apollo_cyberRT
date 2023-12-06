@@ -118,7 +118,7 @@ void Participant::CreateFastRtpsParticipant(
       return;
     }
   }
-  ADEBUG << "cyber ip: " << ip_env;
+  //ADEBUG << "cyber ip: " << ip_env << std::endl;
 
   eprosima::fastrtps::rtps::Locator_t locator;
   locator.port = 0;

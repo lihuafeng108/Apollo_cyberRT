@@ -291,7 +291,7 @@ template <typename Request, typename Response>
 void Client<Request, Response>::HandleResponse(
     const std::shared_ptr<Response>& response,
     const transport::MessageInfo& request_header) {
-  ADEBUG << "client recv response.";
+  //ADEBUG << "client recv response.";
   std::lock_guard<std::mutex> lock(pending_requests_mutex_);
   if (request_header.spare_id() != writer_id_) {
     return;

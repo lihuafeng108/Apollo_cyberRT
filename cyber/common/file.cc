@@ -202,13 +202,13 @@ bool CopyFile(const std::string &from, const std::string &to) {
   if (!src) {
     AWARN << "Source path could not be normally opened: " << from;
     std::string command = "cp -r " + from + " " + to;
-    ADEBUG << command;
+    //ADEBUG << command;
     const int ret = std::system(command.c_str());
     if (ret == 0) {
-      ADEBUG << "Copy success, command returns " << ret;
+      //ADEBUG << "Copy success, command returns " << ret;
       return true;
     } else {
-      ADEBUG << "Copy error, command returns " << ret;
+      //ADEBUG << "Copy error, command returns " << ret;
       return false;
     }
   }

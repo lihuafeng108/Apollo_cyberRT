@@ -98,7 +98,7 @@ void Manager::Shutdown() {
 bool Manager::Join(const RoleAttributes& attr, RoleType role,
                    bool need_publish) {
   if (is_shutdown_.load()) {
-    ADEBUG << "the manager has been shut down.";
+    //ADEBUG << "the manager has been shut down.";
     return false;
   }
   RETURN_VAL_IF(!((1 << role) & allowed_role_), false);
@@ -114,7 +114,7 @@ bool Manager::Join(const RoleAttributes& attr, RoleType role,
 
 bool Manager::Leave(const RoleAttributes& attr, RoleType role) {
   if (is_shutdown_.load()) {
-    ADEBUG << "the manager has been shut down.";
+    //ADEBUG << "the manager has been shut down.";
     return false;
   }
   RETURN_VAL_IF(!((1 << role) & allowed_role_), false);
@@ -187,7 +187,7 @@ void Manager::Notify(const ChangeMsg& msg) { signal_(msg); }
 
 void Manager::OnRemoteChange(const std::string& msg_str) {
   if (is_shutdown_.load()) {
-    ADEBUG << "the manager has been shut down.";
+    //ADEBUG << "the manager has been shut down.";
     return;
   }
 
@@ -202,7 +202,7 @@ void Manager::OnRemoteChange(const std::string& msg_str) {
 
 bool Manager::Publish(const ChangeMsg& msg) {
   if (!is_discovery_started_.load()) {
-    ADEBUG << "discovery is not started.";
+    //ADEBUG << "discovery is not started.";
     return false;
   }
 

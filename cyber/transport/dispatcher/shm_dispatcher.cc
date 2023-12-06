@@ -57,9 +57,7 @@ void ShmDispatcher::AddSegment(const RoleAttributes& self_attr) {
 }
 
 void ShmDispatcher::ReadMessage(uint64_t channel_id, uint32_t block_index) {
-  ADEBUG << "Reading sharedmem message: "
-         << GlobalData::GetChannelById(channel_id)
-         << " from block: " << block_index;
+  //ADEBUG << "Reading sharedmem message: " << GlobalData::GetChannelById(channel_id) << " from block: " << block_index;
   auto rb = std::make_shared<ReadableBlock>();
   rb->index = block_index;
   if (!segments_[channel_id]->AcquireBlockToRead(rb.get())) {
@@ -103,12 +101,12 @@ void ShmDispatcher::ThreadFunc() {
   ReadableInfo readable_info;
   while (!is_shutdown_.load()) {
     if (!notifier_->Listen(100, &readable_info)) {
-      ADEBUG << "listen failed." << std::endl;
+      //ADEBUG << "listen failed." << std::endl;
       continue;
     }
 
     if (readable_info.host_id() != host_id_) {
-      ADEBUG << "shm readable info from other host.";
+      //ADEBUG << "shm readable info from other host.";
       continue;
     }
 
@@ -127,14 +125,11 @@ void ShmDispatcher::ThreadFunc() {
       uint32_t& previous_index = previous_indexes_[channel_id];
       if (block_index != 0 && previous_index != UINT32_MAX) {
         if (block_index == previous_index) {
-          ADEBUG << "Receive SAME index " << block_index << " of channel "
-                 << channel_id;
+          //ADEBUG << "Receive SAME index " << block_index << " of channel " << channel_id;
         } else if (block_index < previous_index) {
-          ADEBUG << "Receive PREVIOUS message. last: " << previous_index
-                 << ", now: " << block_index;
+          //ADEBUG << "Receive PREVIOUS message. last: " << previous_index << ", now: " << block_index;
         } else if (block_index - previous_index > 1) {
-          ADEBUG << "Receive JUMP message. last: " << previous_index
-                 << ", now: " << block_index;
+          //ADEBUG << "Receive JUMP message. last: " << previous_index << ", now: " << block_index;
         }
       }
       previous_index = block_index;

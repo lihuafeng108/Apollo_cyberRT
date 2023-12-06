@@ -100,7 +100,7 @@ bool ShmTransmitter<M>::Transmit(const MessagePtr& msg,
 template <typename M>
 bool ShmTransmitter<M>::Transmit(const M& msg, const MessageInfo& msg_info) {
   if (!this->enabled_) {
-    ADEBUG << "not enable.";
+    //ADEBUG << "not enable.";
     return false;
   }
 
@@ -111,7 +111,7 @@ bool ShmTransmitter<M>::Transmit(const M& msg, const MessageInfo& msg_info) {
     return false;
   }
 
-  ADEBUG << "block index: " << wb.index;
+  //ADEBUG << "block index: " << wb.index;
   if (!message::SerializeToArray(msg, wb.buf, static_cast<int>(msg_size))) {
     AERROR << "serialize to array failed.";
     segment_->ReleaseWrittenBlock(wb);
@@ -130,9 +130,7 @@ bool ShmTransmitter<M>::Transmit(const M& msg, const MessageInfo& msg_info) {
 
   ReadableInfo readable_info(host_id_, wb.index, channel_id_);
 
-  ADEBUG << "Writing sharedmem message: "
-         << common::GlobalData::GetChannelById(channel_id_)
-         << " to block: " << wb.index;
+  //ADEBUG << "Writing sharedmem message: " << common::GlobalData::GetChannelById(channel_id_) << " to block: " << wb.index;
   return notifier_->Notify(readable_info);
 }
 

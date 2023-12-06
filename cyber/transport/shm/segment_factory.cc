@@ -39,7 +39,7 @@ auto SegmentFactory::CreateSegment(uint64_t channel_id) -> SegmentPtr {
     segment_type = shm_conf.transport_conf().shm_conf().shm_type();
   }
 
-  ADEBUG << "segment type: " << segment_type;
+  //ADEBUG << "segment type: " << segment_type;
 
   if (segment_type == PosixSegment::Type()) {
     return std::make_shared<PosixSegment>(channel_id);

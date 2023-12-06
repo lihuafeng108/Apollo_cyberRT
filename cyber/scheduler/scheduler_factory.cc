@@ -61,7 +61,7 @@ Scheduler* Instance() {
         policy = cfg.scheduler_conf().policy();
       } else {
         AWARN << "Scheduler conf named " << cfg_file
-              << " not found, use default.";
+              << " not found, use default." << std::endl;
       }
       if (!policy.compare("classic")) {
         obj = new SchedulerClassic();

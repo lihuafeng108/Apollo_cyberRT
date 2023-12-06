@@ -129,15 +129,15 @@ bool Segment::Destroy() {
     AERROR << "exception.";
     return false;
   }
-  ADEBUG << "destroy.";
+  //ADEBUG << "destroy.";
   return true;
 }
 
 bool Segment::Remap() {
   init_ = false;
-  ADEBUG << "before reset.";
+  //ADEBUG << "before reset.";
   Reset();
-  ADEBUG << "after reset.";
+  //ADEBUG << "after reset.";
   return OpenOnly();
 }
 

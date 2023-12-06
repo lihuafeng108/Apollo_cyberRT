@@ -31,7 +31,7 @@ using common::Hash;
 
 ConditionNotifier::ConditionNotifier() {
   key_ = static_cast<key_t>(Hash("/apollo/cyber/transport/shm/notifier"));
-  ADEBUG << "condition notifier key: " << key_;
+  //ADEBUG << "condition notifier key: " << key_ << std::endl;
   shm_size_ = sizeof(Indicator);
 
   if (!Init()) {
@@ -40,7 +40,7 @@ ConditionNotifier::ConditionNotifier() {
     return;
   }
   next_seq_ = indicator_->next_seq.load();
-  ADEBUG << "next_seq: " << next_seq_;
+  //ADEBUG << "next_seq: " << next_seq_ << std::endl;
 }
 
 ConditionNotifier::~ConditionNotifier() { Shutdown(); }
@@ -56,7 +56,7 @@ void ConditionNotifier::Shutdown() {
 
 bool ConditionNotifier::Notify(const ReadableInfo& info) {
   if (is_shutdown_.load()) {
-    ADEBUG << "notifier is shutdown.";
+    //ADEBUG << "notifier is shutdown.";
     return false;
   }
 
@@ -75,7 +75,7 @@ bool ConditionNotifier::Listen(int timeout_ms, ReadableInfo* info) {
   }
 
   if (is_shutdown_.load()) {
-    ADEBUG << "notifier is shutdown.";
+    //ADEBUG << "notifier is shutdown.";
     return false;
   }
 
@@ -91,7 +91,7 @@ bool ConditionNotifier::Listen(int timeout_ms, ReadableInfo* info) {
         ++next_seq_;
         return true;
       } else {
-        ADEBUG << "seq[" << next_seq_ << "] is writing, can not read now.";
+        //ADEBUG << "seq[" << next_seq_ << "] is writing, can not read now.";
       }
     }
 
@@ -123,7 +123,7 @@ bool ConditionNotifier::OpenOrCreate() {
       Remove();
       ++retry;
     } else if (EEXIST == errno) {
-      ADEBUG << "shm already exist, open only.";
+      //ADEBUG << "shm already exist, open only." << std::endl;
       return OpenOnly();
     } else {
       break;
@@ -153,7 +153,7 @@ bool ConditionNotifier::OpenOrCreate() {
     return false;
   }
 
-  ADEBUG << "open or create true.";
+  //ADEBUG << "open or create true.";
   return true;
 }
 
@@ -181,7 +181,7 @@ bool ConditionNotifier::OpenOnly() {
     return false;
   }
 
-  ADEBUG << "open true.";
+  //ADEBUG << "open true." << std::endl;
   return true;
 }
 
@@ -191,7 +191,7 @@ bool ConditionNotifier::Remove() {
     AERROR << "remove shm failed, error code: " << strerror(errno);
     return false;
   }
-  ADEBUG << "remove success.";
+  //ADEBUG << "remove success.";
 
   return true;
 }

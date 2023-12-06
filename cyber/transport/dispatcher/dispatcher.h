@@ -103,8 +103,7 @@ void Dispatcher::AddListener(const RoleAttributes& self_attr,
       return;
     }
   } else {
-    ADEBUG << "new reader for channel:"
-           << GlobalData::GetChannelById(channel_id);
+    //ADEBUG << "new reader for channel:" << GlobalData::GetChannelById(channel_id);
     handler.reset(new ListenerHandler<MessageT>());
     msg_listeners_.Set(channel_id, handler);
   }
@@ -132,8 +131,7 @@ void Dispatcher::AddListener(const RoleAttributes& self_attr,
       return;
     }
   } else {
-    ADEBUG << "new reader for channel:"
-           << GlobalData::GetChannelById(channel_id);
+    //ADEBUG << "new reader for channel:" << GlobalData::GetChannelById(channel_id);
     handler.reset(new ListenerHandler<MessageT>());
     msg_listeners_.Set(channel_id, handler);
   }

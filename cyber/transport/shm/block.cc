@@ -35,7 +35,7 @@ bool Block::TryLockForWrite() {
   if (!lock_num_.compare_exchange_weak(rw_lock_free, kWriteExclusive,
                                        std::memory_order_acq_rel,
                                        std::memory_order_relaxed)) {
-    ADEBUG << "lock num: " << lock_num_.load();
+    //ADEBUG << "lock num: " << lock_num_.load();
     return false;
   }
   return true;

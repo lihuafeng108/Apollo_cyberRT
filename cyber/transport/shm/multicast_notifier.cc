@@ -96,7 +96,7 @@ bool MulticastNotifier::Listen(int timeout_ms, ReadableInfo* info) {
     }
     return info->DeserializeFrom(buf, nbytes);
   } else if (ready_num == 0) {
-    ADEBUG << "timeout, no readableinfo.";
+    //ADEBUG << "timeout, no readableinfo.";
   } else {
     if (errno == EINTR) {
       AINFO << "poll was interrupted.";
@@ -119,8 +119,8 @@ bool MulticastNotifier::Init() {
     mcast_port = static_cast<uint16_t>(locator.port());
   }
 
-  ADEBUG << "multicast notifier ip: " << mcast_ip;
-  ADEBUG << "multicast notifier port: " << mcast_port;
+  //ADEBUG << "multicast notifier ip: " << mcast_ip;
+  //ADEBUG << "multicast notifier port: " << mcast_port;
 
   notify_fd_ = socket(AF_INET, SOCK_DGRAM, 0);
   if (notify_fd_ == -1) {

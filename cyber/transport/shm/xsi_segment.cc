@@ -55,7 +55,7 @@ bool XsiSegment::OpenOrCreate() {
       Remove();
       ++retry;
     } else if (EEXIST == errno) {
-      ADEBUG << "shm already exist, open only.";
+      //ADEBUG << "shm already exist, open only." << std::endl;
       return OpenOnly();
     } else {
       break;
@@ -129,7 +129,7 @@ bool XsiSegment::OpenOrCreate() {
 
   state_->IncreaseReferenceCounts();
   init_ = true;
-  ADEBUG << "open or create true.";
+  //ADEBUG << "open or create true.";
   return true;
 }
 
@@ -205,7 +205,7 @@ bool XsiSegment::OpenOnly() {
 
   state_->IncreaseReferenceCounts();
   init_ = true;
-  ADEBUG << "open only true.";
+  //ADEBUG << "open only true.";
   return true;
 }
 
@@ -215,7 +215,7 @@ bool XsiSegment::Remove() {
     AERROR << "remove shm failed, error code: " << strerror(errno);
     return false;
   }
-  ADEBUG << "remove success.";
+  //ADEBUG << "remove success.";
   return true;
 }
 
