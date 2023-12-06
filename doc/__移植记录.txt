@@ -16,3 +16,23 @@ mkdir _build
     cmake .. -DCMAKE_INSTALL_PREFIX=/home/lihf/ant_robot/Apollo_cyberRT/open_sources/_build   ##(CMAKE_INSTALL_PREFIX是目标文件安装的路径，选择自己的)
     make -j$(nproc)
     make install
+
+三、tinyxml2交叉编译
+    cd ../../tinyxml2-master/
+    CMakeLists.txt添加交叉编译的设置，参考git的提交；
+    mkdir _build
+    cd _build
+    cmake .. -DCMAKE_INSTALL_PREFIX=/home/lihf/ant_robot/Apollo_cyberRT/open_sources/_build   ##(CMAKE_INSTALL_PREFIX是目标文件安装的路径，选择自己的)
+    make -j$(nproc)
+    make install
+
+四、asio交叉编译
+    cd ../../asio-asio-1-28-0/asio/
+    ./autogen.sh
+    #--host指定要交叉编译的平台，以arm-linux为例
+    #--prefix指定安装目录
+    #--without-boost不依赖boost
+    ./configure --host=arm-linux --prefix=/home/lihf/ant_robot/Apollo_cyberRT/open_sources/_build --without-boost
+    make -j$(nproc)
+    make install
+    ## 只编出头文件
