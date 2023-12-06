@@ -28,6 +28,27 @@ else()
         )
 endif()
 
+## lihf ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#配置C++编译器
+set(CMAKE_CXX_COMPILER /home/lihf/ant_robot/ant_robot_sdk/firefly/rk3568/crosstool/sysroots/x86_64-zxic-linux/usr/bin/aarch64-zxic-linux/aarch64-zxic-linux-g++)
+#配置C编译器
+set(CMAKE_C_COMPILER /home/lihf/ant_robot/ant_robot_sdk/firefly/rk3568/crosstool/sysroots/x86_64-zxic-linux/usr/bin/aarch64-zxic-linux/aarch64-zxic-linux-gcc)
+#配置系统路径
+set(CMAKE_SYSROOT /home/lihf/ant_robot/ant_robot_sdk/firefly/rk3568/crosstool/sysroots/aarch64-zxic-linux)
+#配置库文件头文件搜索路径
+set(CMAKE_FIND_ROOT_PATH  /home/lihf/ant_robot/ant_robot_sdk/firefly/rk3568/crosstool/sysroots/aarch64-zxic-linux)
+
+SET(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+SET(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+SET(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+
+SET(ASIO_INCLUDE_DIR /home/lihf/ant_robot/Apollo_cyberRT/open_sources/_build/include/asio)
+SET(TINYXML2_INCLUDE_DIR /home/lihf/ant_robot/Apollo_cyberRT/open_sources/_build/include)
+SET(TINYXML2_LIBRARY /home/lihf/ant_robot/Apollo_cyberRT/open_sources/_build/lib/libtinyxml2.so)
+SET(fastcdr_INCLUDE_DIR /home/lihf/ant_robot/Apollo_cyberRT/open_sources/_build/include/fastcdr)
+SET(fastcdr_LIB_DIR /home/lihf/ant_robot/Apollo_cyberRT/open_sources/_build/lib)
+##///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 project("fastrtps")
 set(PROJECT_NAME_STYLED "FastRTPS")
 set(PROJECT_NAME_LARGE "Fast RTPS")

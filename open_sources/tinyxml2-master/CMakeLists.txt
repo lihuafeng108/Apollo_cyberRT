@@ -23,7 +23,8 @@ option(tinyxml2_BUILD_TESTING "Build tests for tinyxml2" "${BUILD_TESTING}")
 ##
 ## Honor tinyxml2_SHARED_LIBS to match install interface
 ##
-
+## <lihf> tinyxml2编译动态库使能打开
+option(tinyxml2_SHARED_LIBS "use" ON)
 if (DEFINED tinyxml2_SHARED_LIBS)
     set(BUILD_SHARED_LIBS "${tinyxml2_SHARED_LIBS}")
 endif ()

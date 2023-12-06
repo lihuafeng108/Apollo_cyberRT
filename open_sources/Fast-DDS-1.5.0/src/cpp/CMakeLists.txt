@@ -301,11 +301,15 @@ else()
         ${EXTRA_LIBRARIES}
         )
 
-    if(TINYXML2_LIBRARY)
-        target_link_libraries(${PROJECT_NAME}
-            ${TINYXML2_LIBRARY}
-            )
-    endif()
+    target_link_libraries(${PROJECT_NAME}
+        /home/lihf/ant_robot/Apollo_cyberRT/open_sources/_build/lib/libtinyxml2.so
+        )
+
+    # if(TINYXML2_LIBRARY)
+    #     target_link_libraries(${PROJECT_NAME}
+    #         ${TINYXML2_LIBRARY}
+    #         )
+    # endif()
 endif()
 
 ###############################################################################

@@ -36,3 +36,14 @@ mkdir _build
     make -j$(nproc)
     make install
     ## 只编出头文件
+
+五、Fast-DDS交叉编译
+    cd ../../Fast-DDS-1.5.0/
+    CMakeLists.txt和src/cpp/CMakeLists.txt添加交叉编译的设置，参考git的提交；
+    mkdir _build
+    cd _build
+    cmake .. -DCMAKE_INSTALL_PREFIX=/home/lihf/ant_robot/Apollo_cyberRT/open_sources/_build   ##(CMAKE_INSTALL_PREFIX是目标文件安装的路径，选择自己的)
+    make -j$(nproc)
+        会出现一个编译错误，需要手动添加头文件：
+        Fast-DDS-1.5.0/include/fastrtps/rtps/writer/RTPSWriter.h 要添加：#include <functional>
+    make install
