@@ -1,4 +1,20 @@
 cmake_minimum_required(VERSION 3.15)
+
+## lihf ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#配置C++编译器
+set(CMAKE_CXX_COMPILER /home/lihf/ant_robot/ant_robot_sdk/firefly/rk3568/crosstool/sysroots/x86_64-zxic-linux/usr/bin/aarch64-zxic-linux/aarch64-zxic-linux-g++)
+#配置C编译器
+set(CMAKE_C_COMPILER /home/lihf/ant_robot/ant_robot_sdk/firefly/rk3568/crosstool/sysroots/x86_64-zxic-linux/usr/bin/aarch64-zxic-linux/aarch64-zxic-linux-gcc)
+#配置系统路径
+set(CMAKE_SYSROOT /home/lihf/ant_robot/ant_robot_sdk/firefly/rk3568/crosstool/sysroots/aarch64-zxic-linux)
+#配置库文件头文件搜索路径
+set(CMAKE_FIND_ROOT_PATH  /home/lihf/ant_robot/ant_robot_sdk/firefly/rk3568/crosstool/sysroots/aarch64-zxic-linux)
+
+SET(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+SET(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+SET(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+##///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 project(tinyxml2 VERSION 9.0.0)
 
 include(CTest)
