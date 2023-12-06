@@ -20,7 +20,7 @@
 
 #include "cyber/common/global_data.h"
 #include "cyber/common/log.h"
-#include "cyber/state.h"
+#include "cyber/cyber_state.h"
 #include "cyber/time/time.h"
 
 namespace apollo {

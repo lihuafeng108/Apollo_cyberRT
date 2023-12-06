@@ -52,7 +52,8 @@ std::string program_path() {
 
 GlobalData::GlobalData() {
   InitHostInfo();
-  ACHECK(InitConfig());
+  //(InitConfig());
+  InitConfig();
   process_id_ = getpid();
   auto prog_path = program_path();
   if (!prog_path.empty()) {

@@ -25,7 +25,7 @@
 #include "cyber/message/message_traits.h"
 #include "cyber/message/py_message.h"
 #include "cyber/message/raw_message.h"
-#include "cyber/state.h"
+#include "cyber/cyber_state.h"
 #include "cyber/time/time.h"
 
 namespace apollo {

@@ -32,7 +32,7 @@
 #include "cyber/common/file.h"
 #include "cyber/common/global_data.h"
 #include "cyber/data/data_dispatcher.h"
-#include "cyber/logger/async_logger.h"
+//#include "cyber/logger/async_logger.h"
 #include "cyber/node/node.h"
 #include "cyber/scheduler/scheduler.h"
 #include "cyber/service_discovery/topology_manager.h"
@@ -57,6 +57,7 @@ bool g_atexit_registered = false;
 std::mutex g_mutex;
 std::unique_ptr<Node> clock_node;
 
+#if 0
 logger::AsyncLogger* async_logger = nullptr;
 
 void InitLogger(const char* binary_name) {
@@ -81,8 +82,9 @@ void InitLogger(const char* binary_name) {
 }
 
 void StopLogger() { delete async_logger; }
-
+#endif
 }  // namespace
+
 
 void OnShutdown(int sig) {
   (void)sig;
@@ -99,9 +101,11 @@ bool Init(const char* binary_name) {
     return false;
   }
 
+  #if 0
   InitLogger(binary_name);
   auto thread = const_cast<std::thread*>(async_logger->LogThread());
   scheduler::Instance()->SetInnerThreadAttr("async_log", thread);
+  #endif
   SysMo::Instance();
   std::signal(SIGINT, OnShutdown);
   // Register exit handlers
@@ -141,7 +145,7 @@ void Clear() {
   scheduler::CleanUp();
   service_discovery::TopologyManager::CleanUp();
   transport::Transport::CleanUp();
-  StopLogger();
+  //StopLogger();
   SetState(STATE_SHUTDOWN);
 }
 

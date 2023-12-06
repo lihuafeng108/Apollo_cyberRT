@@ -90,7 +90,8 @@ bool ChoreographyContext::RemoveCRoutine(uint64_t crid) {
       cr->Stop();
       while (!cr->Acquire()) {
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
-        AINFO_EVERY(1000) << "waiting for task " << cr->name() << " completion";
+        //AINFO_EVERY(1000) << "waiting for task " << cr->name() << " completion";
+        T_INFO("waiting for task:%s completion\n",cr->name().c_str());
       }
       it = cr_queue_.erase(it);
       cr->Release();

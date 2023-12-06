@@ -217,3 +217,5 @@ cmake/cmake-build-debug/
 
 # BenchmarkDotNet
 BenchmarkDotNet.Artifacts/
+
+arm-linux-libtool

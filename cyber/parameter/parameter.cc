@@ -18,6 +18,8 @@
 
 #include "cyber/message/protobuf_factory.h"
 
+#include <sstream>
+
 namespace apollo {
 namespace cyber {
 

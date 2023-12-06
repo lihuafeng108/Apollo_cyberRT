@@ -182,7 +182,7 @@ template <typename MessageT>
 auto IntraReader<MessageT>::Begin() const -> Iterator {
   auto blocker = BlockerManager::Instance()->GetBlocker<MessageT>(
       this->role_attr_.channel_name());
-  ACHECK(blocker != nullptr);
+  //ACHECK(blocker != nullptr);
   return blocker->ObservedBegin();
 }
 
@@ -190,7 +190,7 @@ template <typename MessageT>
 auto IntraReader<MessageT>::End() const -> Iterator {
   auto blocker = BlockerManager::Instance()->GetBlocker<MessageT>(
       this->role_attr_.channel_name());
-  ACHECK(blocker != nullptr);
+  //ACHECK(blocker != nullptr);
   return blocker->ObservedEnd();
 }
 

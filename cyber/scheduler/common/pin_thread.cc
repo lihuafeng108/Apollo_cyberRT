@@ -18,6 +18,7 @@
 
 #include <sched.h>
 #include <sys/resource.h>
+#include <sstream>
 
 namespace apollo {
 namespace cyber {

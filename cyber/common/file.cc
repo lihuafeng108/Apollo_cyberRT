@@ -28,9 +28,10 @@
 #include <cstddef>
 #include <fstream>
 #include <string>
+#include <sstream>
 
 #include "google/protobuf/util/json_util.h"
-#include "nlohmann/json.hpp"
+//#include "nlohmann/json.hpp"
 
 namespace apollo {
 namespace cyber {
@@ -126,6 +127,7 @@ bool GetProtoFromFile(const std::string &file_name,
          GetProtoFromBinaryFile(file_name, message);
 }
 
+#if 0
 bool GetProtoFromJsonFile(const std::string &file_name,
                           google::protobuf::Message *message) {
   using google::protobuf::util::JsonParseOptions;
@@ -143,6 +145,7 @@ bool GetProtoFromJsonFile(const std::string &file_name,
   google::protobuf::util::Status dump_status;
   return (JsonStringToMessage(Json.dump(), message, options).ok());
 }
+#endif
 
 bool GetContent(const std::string &file_name, std::string *content) {
   std::ifstream fin(file_name);

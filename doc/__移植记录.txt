@@ -1,3 +1,9 @@
+##################################################################################################################
+## 在编译之前，已经source 交叉编译工具的环境变量了，例如：source  /XXX/environment-setup-aarch64-zxic-linux。       ##
+## 此时终端环境变量 $CC $CXX ${CFLAGS} $(CXXFLAGS) ${LDFLAGS} ${LDFLAGS_EXTRA} -rpath-link --sysroot等就会被设置。##
+## cyber的makefile就会使用这些环境变量编译出目标平台的文件，你也可以自己手动修改makefile已适应自己的目标板编译环境。    ##
+#################################################################################################################
+
 cd cyber
 一、cyber裁剪
     1、删除所有测试文件
@@ -48,7 +54,14 @@ mkdir _build
         Fast-DDS-1.5.0/include/fastrtps/rtps/writer/RTPSWriter.h 要添加：#include <functional>
     make install
 
-六、cyber交叉编译
-    cd ../../../
+六、protobuf交叉编译
+    cd ../../protobuf-3.14.0/
+    ./autogen.sh
+    ./configure --prefix=/home/lihf/ant_robot/Apollo_cyberRT/open_sources/_build --host=arm-linux --with-sysroot=/home/lihf/ant_robot/ant_robot_sdk/firefly/rk3568/crosstool/sysroots/aarch64-zxic-linux
+    make -j$(nproc)
+    make install
+
+七、cyber交叉编译
+    cd ../../
     添加makefile
     ubuntu源码安装protobuf，并使用protoc手动编译cyber/proto下的文件，这里直接提交各*.proto文件生成的的cc和h文件

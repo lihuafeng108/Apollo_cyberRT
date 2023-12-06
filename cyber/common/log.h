@@ -21,6 +21,87 @@
 #ifndef CYBER_COMMON_LOG_H_
 #define CYBER_COMMON_LOG_H_
 
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+
+#include "cyber/binary.h"
+
+#ifndef MODULE_NAME
+#define MODULE_NAME apollo::cyber::binary::GetName().c_str()
+#endif
+
+//lihf: 注意换成标准输出后，打印不会自动换行...
+#define ADEBUG   std::cout
+#define AINFO    std::cout
+#define AWARN    std::cout
+#define AERROR   std::cerr
+#define AFATAL   std::cerr
+
+#define T_DEBUG printf
+#define T_INFO  printf
+#define T_WARN  printf
+#define T_ERROR printf
+#define T_FATAL printf
+
+#if !defined(RETURN_IF_NULL)
+#define RETURN_IF_NULL(ptr)          \
+  if (ptr == nullptr) {              \
+    printf(" is nullptr.\n");            \
+    return;                          \
+  }
+#endif
+
+#if !defined(RETURN_VAL_IF_NULL)
+#define RETURN_VAL_IF_NULL(ptr, val) \
+  if (ptr == nullptr) {              \
+    printf("%s is nullptr.\n",#ptr);     \
+    return val;                      \
+  }
+#endif
+
+#if !defined(RETURN_IF)
+#define RETURN_IF(condition)           \
+  if (condition) {                     \
+    printf("%s is met.\n",#condition);     \
+    return;                            \
+  }
+#endif
+
+#if !defined(RETURN_VAL_IF)
+#define RETURN_VAL_IF(condition, val)  \
+  if (condition) {                     \
+    printf("%s is met.\n",#condition);     \
+    return val;                        \
+  }
+#endif
+
+#if !defined(_RETURN_VAL_IF_NULL2__)
+#define _RETURN_VAL_IF_NULL2__
+#define RETURN_VAL_IF_NULL2(ptr, val) \
+  if (ptr == nullptr) {               \
+    return (val);                     \
+  }
+#endif
+
+#if !defined(_RETURN_VAL_IF2__)
+#define _RETURN_VAL_IF2__
+#define RETURN_VAL_IF2(condition, val) \
+  if (condition) {                     \
+    return (val);                      \
+  }
+#endif
+
+#if !defined(_RETURN_IF2__)
+#define _RETURN_IF2__
+#define RETURN_IF2(condition) \
+  if (condition) {            \
+    return;                   \
+  }
+#endif
+
+
+#if 0
 #include <cstdarg>
 #include <string>
 
@@ -140,6 +221,8 @@
   if (condition) {            \
     return;                   \
   }
+#endif
+
 #endif
 
 #endif  // CYBER_COMMON_LOG_H_

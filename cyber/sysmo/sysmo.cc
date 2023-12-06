@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright 2018 The Apollo Authors. All Rights Reserved.
+ * Copyright 2019 The Apollo Authors. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,43 @@
  * limitations under the License.
  *****************************************************************************/
 
-#include "cyber/state.h"
+#include "cyber/sysmo/sysmo.h"
 
-#include <atomic>
+#include "cyber/common/environment.h"
 
 namespace apollo {
 namespace cyber {
 
-namespace {
-std::atomic<State> g_cyber_state;
+using apollo::cyber::common::GetEnv;
+
+SysMo::SysMo() { Start(); }
+
+void SysMo::Start() {
+  auto sysmo_start = GetEnv("sysmo_start");
+  if (sysmo_start != "" && std::stoi(sysmo_start)) {
+    start_ = true;
+    sysmo_ = std::thread(&SysMo::Checker, this);
+  }
 }
 
-State GetState() { return g_cyber_state.load(); }
+void SysMo::Shutdown() {
+  if (!start_ || shut_down_.exchange(true)) {
+    return;
+  }
 
-void SetState(const State& state) { g_cyber_state.store(state); }
+  cv_.notify_all();
+  if (sysmo_.joinable()) {
+    sysmo_.join();
+  }
+}
+
+void SysMo::Checker() {
+  while (cyber_unlikely(!shut_down_.load())) {
+    scheduler::Instance()->CheckSchedStatus();
+    std::unique_lock<std::mutex> lk(lk_);
+    cv_.wait_for(lk, std::chrono::milliseconds(sysmo_interval_ms_));
+  }
+}
 
 }  // namespace cyber
 }  // namespace apollo
