@@ -47,3 +47,8 @@ mkdir _build
         会出现一个编译错误，需要手动添加头文件：
         Fast-DDS-1.5.0/include/fastrtps/rtps/writer/RTPSWriter.h 要添加：#include <functional>
     make install
+
+六、cyber交叉编译
+    cd ../../../
+    添加makefile
+    ubuntu源码安装protobuf，并使用protoc手动编译cyber/proto下的文件，这里直接提交各*.proto文件生成的的cc和h文件
