@@ -2,3 +2,5 @@
 cd cyber
 find . -name "*_test.cc" | xargs rm -f
 2、删除不需要的模块和工程文件（后续需要可以添加回来）
+3、删除所有BUILD文件
+find . -name "BUILD" | xargs rm -f
