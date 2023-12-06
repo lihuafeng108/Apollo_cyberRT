@@ -1,6 +1,18 @@
-1、删除所有测试文件
 cd cyber
-find . -name "*_test.cc" | xargs rm -f
-2、删除不需要的模块和工程文件（后续需要可以添加回来）
-3、删除所有BUILD文件
-find . -name "BUILD" | xargs rm -f
+一、cyber裁剪
+    1、删除所有测试文件
+    find . -name "*_test.cc" | xargs rm -f
+    2、删除不需要的模块和工程文件（后续需要可以添加回来）
+    3、删除所有BUILD文件
+    find . -name "BUILD" | xargs rm -f
+
+cd open_sources
+mkdir _build
+二、Fast-CDR交叉编译
+    cd Fast-CDR-1.0.7
+    CMakeLists.txt添加交叉编译的设置，参考git的提交；
+    mkdir _build
+    cd _build
+    cmake .. -DCMAKE_INSTALL_PREFIX=/home/lihf/ant_robot/Apollo_cyberRT/open_sources/_build   ##(CMAKE_INSTALL_PREFIX是目标文件安装的路径，选择自己的)
+    make -j$(nproc)
+    make install
