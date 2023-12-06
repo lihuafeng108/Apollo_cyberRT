@@ -103,7 +103,7 @@ void ShmDispatcher::ThreadFunc() {
   ReadableInfo readable_info;
   while (!is_shutdown_.load()) {
     if (!notifier_->Listen(100, &readable_info)) {
-      ADEBUG << "listen failed.";
+      ADEBUG << "listen failed." << std::endl;
       continue;
     }
 

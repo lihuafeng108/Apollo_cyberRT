@@ -605,6 +605,37 @@ Cdr& Cdr::serialize(const bool bool_t)
     throw NotEnoughMemoryException(NotEnoughMemoryException::NOT_ENOUGH_MEMORY_MESSAGE_DEFAULT);
 }
 
+Cdr& Cdr::serialize(const char *string_t,size_t datasize)
+{
+    uint32_t length = 0;
+    if(string_t != nullptr)
+        length = (uint32_t)datasize;
+
+    if(length > 0)
+    {
+        Cdr::state state(*this);
+        serialize(length);
+
+        if(((m_lastPosition - m_currentPosition) >= length) || resize(length))
+        {
+            // Save last datasize.
+            m_lastDataSize = sizeof(uint8_t);
+
+            m_currentPosition.memcopy(string_t, length);
+            m_currentPosition += length;
+        }
+        else
+        {
+            setState(state);
+            throw NotEnoughMemoryException(NotEnoughMemoryException::NOT_ENOUGH_MEMORY_MESSAGE_DEFAULT);
+        }
+    }
+    else
+        serialize(length);
+
+    return *this;
+}
+
 Cdr& Cdr::serialize(const char *string_t)
 {
     uint32_t length = 0;
@@ -1158,7 +1189,7 @@ Cdr& Cdr::deserialize(int16_t &short_t)
         makeAlign(align);
 
         if(m_swapBytes)
-        {    
+        {
             char *dst = reinterpret_cast<char*>(&short_t);
 
             m_currentPosition++ >> dst[1];

@@ -157,7 +157,7 @@ namespace eprosima
                 void setDDSCdrOptions(uint16_t options);
 
                 // TODO
-                void changeEndianness(Endianness endianness); 
+                void changeEndianness(Endianness endianness);
 
                 /*!
                  * @brief This function returns the current endianness used by the CDR type.
@@ -794,6 +794,8 @@ namespace eprosima
                         return serialize(bool_t);
                     }
 
+                Cdr& serialize(const char *string_t,size_t datasize);
+
                 /*!
                  * @brief This function serializes a string.
                  * @param string_t The pointer to the string that will be serialized in the buffer.
@@ -824,7 +826,7 @@ namespace eprosima
                  * @exception exception::NotEnoughMemoryException This exception is thrown when trying to serialize a position that exceeds the internal memory size.
                  */
                 inline
-                    Cdr& serialize(const std::string &string_t) {return serialize(string_t.c_str());}
+                    Cdr& serialize(const std::string &string_t) {return serialize(string_t.c_str(),string_t.size());}
 
                 /*!
                  * @brief This function serializes a std::string with a different endianness.
@@ -899,7 +901,7 @@ namespace eprosima
                         return *this;
                     }
 
-#ifdef _MSC_VER 
+#ifdef _MSC_VER
                 template<>
                     Cdr& serialize<bool>(const std::vector<bool> &vector_t)
                     {
@@ -1665,9 +1667,9 @@ namespace eprosima
                 /*!
                  * @brief This function deserializes a string with a different endianness.
                  * This function allocates memory to store the string. The user pointer will be set to point this allocated memory.
-                 * The user will have to free this allocated memory using free() 
+                 * The user will have to free this allocated memory using free()
                  * @param string_t The pointer that will point to the string read from the buffer.
-                 * The user will have to free the allocated memory using free() 
+                 * The user will have to free the allocated memory using free()
                  * @return Reference to the eprosima::fastcdr::Cdr object.
                  * @exception exception::NotEnoughMemoryException This exception is thrown when trying to deserialize a position that exceeds the internal memory size.
                  */
@@ -2200,7 +2202,7 @@ namespace eprosima
                 /*!
                  * @brief This function template deserializes a raw sequence.
                  * This function allocates memory to store the sequence. The user pointer will be set to point this allocated memory.
-                 * The user will have to free this allocated memory using free() 
+                 * The user will have to free this allocated memory using free()
                  * @param sequence_t The pointer that will store the sequence read from the buffer.
                  * @param numElements This variable return the number of elements of the sequence.
                  * @return Reference to the eprosima::fastcdr::Cdr object.
@@ -2242,7 +2244,7 @@ namespace eprosima
                 /*!
                  * @brief This function template deserializes a raw sequence with a different endianness.
                  * This function allocates memory to store the sequence. The user pointer will be set to point this allocated memory.
-                 * The user will have to free this allocated memory using free() 
+                 * The user will have to free this allocated memory using free()
                  * @param sequence_t The pointer that will store the sequence read from the buffer.
                  * @param numElements This variable return the number of elements of the sequence.
                  * @return Reference to the eprosima::fastcdr::Cdr object.
